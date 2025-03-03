@@ -2,7 +2,7 @@
 
 Une application web moderne et responsive permettant de consulter la météo en temps réel de n'importe quelle ville dans le monde. Développée avec Node.js, Express, et TypeScript.
 
-![Application Météo](weather-app-preview.png)
+![Application Météo](/src/public/images/weather-app-preview.png)
 
 ## 🌟 Fonctionnalités
 
