@@ -12,6 +12,8 @@ Une application web moderne et responsive permettant de consulter la météo en 
 - 🎨 Design moderne avec animations fluides
 - 🔄 Mise à jour en temps réel sans rechargement
 - 🎯 Exemples de villes populaires en un clic
+- 📚 Documentation API avec Swagger
+- ✅ Validation des entrées avec express-validator
 
 ## 🛠️ Technologies Utilisées
 
@@ -21,6 +23,8 @@ Une application web moderne et responsive permettant de consulter la météo en 
   - TypeScript
   - CORS
   - dotenv
+  - Swagger (swagger-ui-express, swagger-jsdoc)
+  - express-validator
 
 - **Frontend**
   - HTML5
@@ -72,6 +76,7 @@ Une application web moderne et responsive permettant de consulter la météo en 
    ```
 
 L'application sera disponible sur `http://localhost:3009`
+La documentation Swagger sera accessible sur `http://localhost:3009/api-docs`
 
 ## 📦 Structure du Projet
 
@@ -81,6 +86,8 @@ src/
 ├── routes/            # Routes API
 ├── public/            # Assets statiques
 ├── types/            # Types TypeScript
+├── middlewares/       # Middlewares (validation, etc.)
+├── config/            # Configuration (Swagger, etc.)
 └── app.ts            # Point d'entrée
 ```
 
@@ -102,7 +109,8 @@ src/
 ## 🌐 API Endpoints
 
 ### GET /api/weather
-- **Query Params** : `city` (nom de la ville)
+- **Query Params** : `city` (nom de la ville, optionnel, défaut: "Paris")
+- **Validation** : Le nom de la ville doit être une chaîne de caractères d'au moins 2 caractères
 - **Response** : 
   ```json
   {
@@ -113,6 +121,35 @@ src/
     "humidity": 65
   }
   ```
+- **Erreur (400)** :
+  ```json
+  {
+    "status": "error",
+    "errors": [
+      {
+        "message": "La ville doit être une chaîne de caractères"
+      }
+    ]
+  }
+  ```
+
+## 📚 Documentation API
+
+L'application utilise Swagger pour documenter l'API. La documentation est accessible à l'URL `/api-docs` et offre une interface interactive pour tester les endpoints.
+
+### Fonctionnalités de Swagger
+- Description détaillée des endpoints
+- Schémas de requêtes et réponses
+- Interface interactive pour tester l'API
+- Documentation des codes d'erreur
+
+## ✅ Validation des Entrées
+
+L'application utilise express-validator pour valider les entrées utilisateur :
+
+- Validation du paramètre `city` (doit être une chaîne de caractères d'au moins 2 caractères)
+- Messages d'erreur personnalisés
+- Gestion centralisée des erreurs de validation
 
 ## 🎨 Personnalisation
 
@@ -164,4 +201,5 @@ Si vous rencontrez des problèmes :
 2. Assurez-vous que le port 3009 est disponible
 3. Consultez les logs du serveur
 4. Vérifiez la console du navigateur
+5. Pour les problèmes de validation, vérifiez les erreurs retournées par l'API
 
