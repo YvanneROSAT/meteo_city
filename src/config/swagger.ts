@@ -1,4 +1,12 @@
 import swaggerJSDoc from 'swagger-jsdoc';
+import path from 'path';
+
+const isProduction = process.env.NODE_ENV === 'production';
+const port = process.env.PORT || 3009;
+
+const servers = isProduction
+  ? [{ url: '/', description: 'Serveur de production' }]
+  : [{ url: `http://localhost:${port}`, description: 'Serveur de développement' }];
 
 const swaggerOptions: swaggerJSDoc.Options = {
   definition: {
@@ -12,14 +20,13 @@ const swaggerOptions: swaggerJSDoc.Options = {
         email: 'support@example.com'
       }
     },
-    servers: [
-      {
-        url: 'http://localhost:3009',
-        description: 'Serveur de développement'
-      }
-    ]
+    servers
   },
-  apis: ['./src/routes/*.ts', './src/controllers/*.ts', './src/types/*.ts']
+  apis: [
+    path.join(__dirname, '../routes/*.{ts,js}'),
+    path.join(__dirname, '../controllers/*.{ts,js}'),
+    path.join(__dirname, '../types/*.{ts,js}')
+  ]
 };
 
 const swaggerSpec = swaggerJSDoc(swaggerOptions);

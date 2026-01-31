@@ -42,7 +42,7 @@ app.use((req, res) => {
     res.status(404).json({ error: 'Route non trouvée' });
 });
 
-const PORT = process.env.PORT || 3010;
+const PORT = process.env.PORT || 3009;
 app.listen(PORT, () => {
     console.log(`Serveur démarré sur http://localhost:${PORT}`);
     console.log(`Documentation Swagger disponible sur http://localhost:${PORT}/api-docs`);
