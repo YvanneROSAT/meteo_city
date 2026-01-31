@@ -10,9 +10,8 @@ import swaggerSpec from './config/swagger';
 dotenv.config();
 
 // Vérification de la clé API
-const API_KEY = process.env.OPENWEATHER_API_KEY;
-if (!API_KEY) {
-    throw new Error('La clé API OpenWeather n\'est pas définie dans le fichier .env');
+if (!process.env.OPENWEATHER_API_KEY) {
+    console.warn('ATTENTION: La clé API OpenWeather n\'est pas définie. Les requêtes météo échoueront.');
 }
 
 const app = express();
